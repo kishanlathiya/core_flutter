@@ -5,196 +5,124 @@ void main() {
   runApp(
     const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Otp(),
+      home: ColorPalette(),
     ),
   );
 }
 
-class Otp extends StatefulWidget {
-  const Otp({Key? key}) : super(key: key);
+class ColorPalette extends StatefulWidget {
+  const ColorPalette({Key? key}) : super(key: key);
 
   @override
-  State<Otp> createState() => _OtpState();
+  State<ColorPalette> createState() => _ColorPaletteState();
 }
 
-class _OtpState extends State<Otp> {
-  Random random = Random();
-  int length = 0;
-  var number = [];
-  TextEditingController controller = TextEditingController();
+class _ColorPaletteState extends State<ColorPalette> {
 
-  // var rndnumber="";
-  // var rnd= new Random();
+  Random random = Random();
+  int colorPalette = 50;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xff15172b),
       body: Container(
-        // padding: EdgeInsets.all(130),
-        // color: Color(0xff15172b),
+        alignment: Alignment.center,
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              Colors.white,
+              Color(0xffd8e6f4),
+            ],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+          ),
+        ),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
+            SizedBox(height: 70),
             Text(
-              "OTP Generator",
+              "Color Palette\n   Generator",
               style: TextStyle(
-                  color: Color(
-                    0xfff6db87,
-                  ),
-                  fontSize: 24),
+                color: Color(0xff3bb3f9),
+                fontSize: 25,
+                fontWeight: FontWeight.bold,
+              ),
             ),
-            //SizedBox(height: 80),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  alignment: Alignment.center,
-                  height: 80,
-                  width: 260,
-                  child: TextField(
-                    controller: controller,
-                    autofocus: true,
-                    onChanged: (val) {
-                      length = int.parse(val);
-                    },
-                    maxLength: 1,
-                    style: TextStyle(
-                      color: Color(0xfff6db87),
-                      fontSize: 15,
-                    ),
-                    keyboardType: TextInputType.number,
-                    cursorColor: Color(0xfff6db87),
-                    decoration: InputDecoration(
-                      hintText: "Enter OTP Length",
-                      hintStyle: TextStyle(
-                        color: Colors.grey,
-                      ),
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Color(0xfff6db87),
-                        ),
-                      ),
-                    ),
-                  ),
+            SizedBox(height: 70),
+            Container(
+              height: 75,
+              width: 130,
+              decoration: BoxDecoration(
+                color: Color.fromRGBO(255, colorPalette, 20, 1),
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(15),
+                  topRight: Radius.circular(15),
                 ),
-              ],
+              ),
             ),
+            Container(
+              height: 75,
+              width: 130,
+              color: Color.fromRGBO(colorPalette, 200, 45, 0.5),
+            ),
+            Container(
+              height: 75,
+              width: 130,
+              color: Color.fromRGBO(10, colorPalette, 874, 1),
+            ),
+            Container(
+              height: 75,
+              width: 130,
+              color: Color.fromRGBO(56, 788, colorPalette, 0.8),
+            ),
+            Container(
+              height: 75,
+              width: 130,
+              color: Color.fromRGBO(150, 345, colorPalette, 1),
+            ),
+            Container(
+              height: 75,
+              width: 130,
+              decoration: BoxDecoration(
+                color: Color.fromRGBO(100, colorPalette, 38, 1),
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(15),
+                  bottomRight: Radius.circular(15),
+                ),
+              ),
+            ),
+            SizedBox(height: 70),
             InkWell(
               onTap: () {
                 setState(() {
-                  number.clear();
-                  if (length > 3 && length < 9) {
-                    for (int i = 0; i < length; i++) {
-                      number.add(random.nextInt(9));
-                    }
-                  } else {
-                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                        content: Text("Enter length between 4 to 8 digit")));
-                  }
+                  colorPalette = random.nextInt(500);
                 });
               },
               child: Ink(
                 child: Container(
                   alignment: Alignment.center,
-                  height: 60,
+                  height: 50,
                   width: 230,
                   decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: [
-                        Color(0xffffe8b8),
-                        Color(0xfff6db87),
-                      ],
-                      begin: Alignment.centerLeft,
-                      end: Alignment.bottomRight,
+                    border: Border.all(
+                      color: Color(0xff3bb3f9),
+                      width: 3,
                     ),
                     borderRadius: BorderRadius.all(
-                      Radius.circular(15),
+                      Radius.circular(10),
                     ),
                   ),
                   child: Text(
                     "Generate",
                     style: TextStyle(
-                      color: Color(0xff15172b),
-                      fontSize: 25,
+                      color: Color(0xff3bb3f9),
+                      fontSize: 22,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),
               ),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  alignment: Alignment.center,
-                  height: 60,
-                  width: 320,
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: [
-                        Color(0xffffe8b8),
-                        Color(0xfff6db87),
-                      ],
-                      begin: Alignment.centerLeft,
-                      end: Alignment.bottomRight,
-                    ),
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(15),
-                    ),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: number
-                        .map(
-                          (e) => Text(
-                        "$e",
-                        style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold),
-                      ),
-                    )
-                        .toList(),
-                  ),
-                ),
-              ],
-            ),
-            InkWell(
-              onTap: () {
-                setState(() {
-                  number.clear();
-                  controller.clear();
-                });
-              },
-              child: Ink(
-                child: Container(
-                  alignment: Alignment.center,
-                  height: 60,
-                  width: 230,
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: [
-                        Color(0xffffe8b8),
-                        Color(0xfff6db87),
-                      ],
-                      begin: Alignment.centerLeft,
-                      end: Alignment.bottomRight,
-                    ),
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(15),
-                    ),
-                  ),
-                  child: Text(
-                    "Reset",
-                    style: TextStyle(
-                      color: Color(0xff15172b),
-                      fontSize: 25,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(height: 5),
           ],
         ),
       ),
